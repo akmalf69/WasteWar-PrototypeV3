@@ -34,6 +34,11 @@ public class Pickup : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerController.Instance == null)
+        {
+            return;
+        }
+
         Vector3 playerPos = PlayerController.Instance.transform.position;
 
         if (Vector3.Distance(transform.position, playerPos) < pickUpDistance)

@@ -1,6 +1,4 @@
 using Inventory.Model;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,14 +17,22 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         for (int i = 0; i < equippableItems.Length; i++)
+        {
             shopPanelsGO[i].SetActive(true);
+        }
 
         LoadPanels();
-        UpdateGoldText();
+        EconomyManager.Instance.OnGoldAmountChanged += UpdateGoldText;
+        UpdateGoldText(EconomyManager.Instance.GetCurrentGold());
         CheckPurchasable();
     }
 
-    public void SetCurrentGold(int newGoldAmount)
+    private void OnDestroy()
+    {
+        EconomyManager.Instance.OnGoldAmountChanged -= UpdateGoldText;
+    }
+
+    private void UpdateGoldText(int newGoldAmount)
     {
         currentGold = newGoldAmount;
         goldText.text = currentGold.ToString();
@@ -35,15 +41,7 @@ public class ShopManager : MonoBehaviour
 
     public void AddGolds()
     {
-        currentGold++;
-        goldText.text = currentGold.ToString();
         EconomyManager.Instance.UpdateCurrentGold();
-    }
-
-    private void UpdateGoldText()
-    {
-        currentGold = EconomyManager.Instance.GetCurrentGold();
-        goldText.text = currentGold.ToString();
     }
 
     public void CheckPurchasable()
