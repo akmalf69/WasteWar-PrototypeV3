@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77042ea506de63942b82dcede4f12bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionName: 
 --- !u!1 &9094447381878331347
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,7 +55,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7357455029332222751}
   - component: {fileID: 4168898949666951079}
-  - component: {fileID: 1602816665317281945}
   m_Layer: 0
   m_Name: AreaExit
   m_TagString: Untagged
@@ -76,7 +76,7 @@ Transform:
   m_Children:
   - {fileID: 2609234273310669218}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4168898949666951079
 BoxCollider2D:
@@ -123,15 +123,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0765762, y: 1.663658}
   m_EdgeRadius: 0
---- !u!114 &1602816665317281945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9094447381878331347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 554b6ea86d2c5a144a698016248e27ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -152,6 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd437c6342562494bbcb0acfe831f1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageButtons:
+  - {fileID: 740608241}
+  - {fileID: 1652558041}
+  - {fileID: 523932380}
+  - {fileID: 1351775193}
 --- !u!4 &94093259
 Transform:
   m_ObjectHideFlags: 0

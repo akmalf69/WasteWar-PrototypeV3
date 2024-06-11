@@ -8,24 +8,29 @@ public class Finish : MonoBehaviour
     public GameObject player;
     public GameObject uiManager;
     public GameObject manager;
+    public GameObject stageClearPanel;
+
+    void Start()
+    {
+        if (stageClearPanel != null)
+        {
+            stageClearPanel.SetActive(false);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            UnlockNewStage();
-            DestroyObject();
-            SceneManager.LoadScene("StageSelect");
+            ShowStageClearPanel();
         }
     }
 
-    void UnlockNewStage()
+    private void ShowStageClearPanel()
     {
-        if(SceneManager.GetActiveScene().buildIndex >= PlayerPrefs.GetInt("ReachedIndex"))
+        if (stageClearPanel != null)
         {
-            PlayerPrefs.SetInt("ReachedIndex", SceneManager.GetActiveScene().buildIndex + 1);
-            PlayerPrefs.SetInt("UnlockedStage", PlayerPrefs.GetInt("UnlockedStage", 1)  + 1);
-            PlayerPrefs.Save();
+            stageClearPanel.SetActive(true);
         }
     }
 
@@ -44,4 +49,30 @@ public class Finish : MonoBehaviour
             Destroy(manager);
         }
     }
+
+    public void LoadMainMenu()
+    {
+        DestroyObject();
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void UnlockNewStage()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        int currentStageNumber = int.Parse(currentSceneName.Split(' ')[1]);
+
+        int nextStageNumber = currentStageNumber + 1;
+        int highestUnlockedStage = PlayerPrefs.GetInt("HighestUnlockedStage", 0);
+
+        // Check if the next stage is not already unlocked
+        if (nextStageNumber > highestUnlockedStage)
+        {
+            PlayerPrefs.SetInt("HighestUnlockedStage", nextStageNumber);
+            PlayerPrefs.Save();
+        }
+
+        DestroyObject();
+        SceneManager.LoadScene("StageSelect");
+    }
+
 }

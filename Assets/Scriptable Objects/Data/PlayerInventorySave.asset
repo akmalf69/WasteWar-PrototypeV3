@@ -10,39 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 000ac628eb141fa44945e3e2c9eab779, type: 3}
-  m_Name: PlayerInventory
+  m_Name: PlayerInventorySave
   m_EditorClassIdentifier: 
   inventoryItems:
-  - quantity: 2
-    item: {fileID: 11400000, guid: 6985b4c100cb69b4f8fb57c9ba16c9ca, type: 2}
-    itemState: []
+  - quantity: 5
+    item: {fileID: 11400000, guid: 2a0a7adb1203c5d43a45a0fd7ae7e868, type: 2}
   - quantity: 0
     item: {fileID: 0}
-    itemState: []
   - quantity: 1
     item: {fileID: 11400000, guid: 63fe2b60dc70d0b459979b5dc68c7d4e, type: 2}
-    itemState: []
   - quantity: 2
     item: {fileID: 11400000, guid: 2a0a7adb1203c5d43a45a0fd7ae7e868, type: 2}
-    itemState: []
   - quantity: 0
     item: {fileID: 0}
-    itemState: []
   - quantity: 0
     item: {fileID: 0}
-    itemState: []
   - quantity: 0
     item: {fileID: 0}
-    itemState: []
   - quantity: 0
     item: {fileID: 0}
-    itemState: []
   - quantity: 0
     item: {fileID: 0}
-    itemState: []
   - quantity: 0
     item: {fileID: 0}
-    itemState: []
-  lastPlayerPos: {x: 0, y: 0}
-  LastMap: 0
   <Size>k__BackingField: 10
