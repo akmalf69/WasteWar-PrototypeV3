@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : Singleton<PlayerHealth>
 {
@@ -11,15 +10,17 @@ public class PlayerHealth : Singleton<PlayerHealth>
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float knockBackThrustAmount = 10f;
     [SerializeField] private float damageRecoveryTime = 1f;
+    public Transform respawnPoint;
+    [SerializeField] private float deathDelay = 2.5f;
 
     private Slider healthSlider;
     private int currentHealth;
     private bool canTakeDamage = true;
     private Knockback knockback;
     private Flash flash;
+    private Animator animator;
 
     const string HEALTH_SLIDER_TEXT = "Health Slider";
-    const string TOWN_TEXT = "Scene1";
     readonly int DEATH_HASH = Animator.StringToHash("Death");
 
     protected override void Awake()
@@ -28,6 +29,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
 
         flash = GetComponent<Flash>();
         knockback = GetComponent<Knockback>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -83,18 +85,26 @@ public class PlayerHealth : Singleton<PlayerHealth>
         if (currentHealth <= 0 && !isDead)
         {
             isDead = true;
-            Destroy(ActiveWeapon.Instance.gameObject);
             currentHealth = 0;
-            GetComponent<Animator>().SetTrigger(DEATH_HASH);
-            StartCoroutine(DeathLoadSceneRoutine());
+            animator.SetTrigger(DEATH_HASH);
+            StartCoroutine(DeathRespawnRoutine());
         }
     }
 
-    private IEnumerator DeathLoadSceneRoutine()
+    private IEnumerator DeathRespawnRoutine()
     {
-        yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
-        SceneManager.LoadScene(TOWN_TEXT);
+        yield return new WaitForSeconds(deathDelay);
+        RespawnPlayer();
+    }
+
+    private void RespawnPlayer()
+    {
+        isDead = false;
+        currentHealth = maxHealth;
+        transform.position = respawnPoint.position;
+        animator.ResetTrigger(DEATH_HASH);
+        animator.Play("Idle");
+        UpdateHealthSlider();
     }
 
     private IEnumerator DamageRecoveryRoutine()
